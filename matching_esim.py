@@ -18,9 +18,9 @@ from fastNLP.core.losses import CrossEntropyLoss
 from fastNLP.embeddings import StaticEmbedding
 from fastNLP.embeddings import ElmoEmbedding
 from fastNLP.io.pipe.matching import SNLIPipe, RTEPipe, MNLIPipe, QNLIPipe, QuoraPipe
-from fastNLP.models.snli import ESIM
-
 from fastNLP import cache_results
+
+from model.esim import ESIM
 
 
 # define hyper-parameters
@@ -67,7 +67,7 @@ n_gpu = len(device)
 if n_gpu > 0:
     torch.cuda.manual_seed_all(arg.seed)
 
-print(f"traing dataset { arg.dataset }, and using { n_gpu } gpus which is {arg.device}")
+print(f"traing dataset {arg.dataset}, and using {n_gpu} gpus which is {arg.device}")
 
 
 @cache_results(_cache_fp="../cache/snli", _refresh=True)

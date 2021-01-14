@@ -25,4 +25,4 @@ arg = vars(argument.parse_args())
 arg['train'] = 1
 
 
-print(arg.device)
+print(arg)

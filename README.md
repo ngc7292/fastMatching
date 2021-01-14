@@ -8,13 +8,12 @@
 
 Name| Paper | Description 
 :---: | :---: | :---: 
-MNLI | - | -
-SNLI | - | -
+MNLI | [A Broad-Coverage Challenge Corpus for Sentence Understanding through Inference]() | 一个文本蕴含的任务，在给定前提（Premise）下，需要判断假设（Hypothesis）是否成立，其中因为MNLI主打卖点是集合了许多不同领域风格的文本，因此又分为matched和mismatched两个版本的MNLI数据集，前者指训练集和测试集的数据来源一致，而后者指来源不一致。该任务属于句子对的文本三分类问题。 
+SNLI | [A large annotated corpus for learning natural language inference]() | -
 RTE | - | -
-QNLI | - | -
-Quora | - | -
-MSMARCO(Ranking) | - | -
-MSMARCO(Question Anwsering) | - | -
+QNLI | [SQuAD: 100,000+ Questions for Machine Comprehension of Text]() | -
+Quora | First Quora Dataset Release: Question Pairs | -
+MSMARCO(Ranking & ReRanking) | MS MARCO: A HUMAN GENERATED MACHINE READING COMPREHENSION DATASET | -
 SQuADv2.0| [Know What You Don't Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) | -
 ASNQ | [TANDA: Transfer and Adapt Pre-Trained Transformer Models for Answer Sentence Selection](https://arxiv.org/pdf/1911.04118.pdf) | -
 
