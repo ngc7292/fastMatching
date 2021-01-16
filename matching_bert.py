@@ -13,10 +13,10 @@ from fastNLP.core import Trainer, Tester, AccuracyMetric, Const
 from fastNLP.core.callback import WarmupCallback, EvaluateCallback
 from fastNLP.core.optimizer import AdamW
 from fastNLP.embeddings import BertEmbedding
-from fastNLP.io.pipe.matching import SNLIBertPipe, RTEBertPipe, MNLIBertPipe, \
-    QNLIBertPipe
 from fastNLP.models.bert import BertForSentenceMatching
 from fastNLP import LossInForward
+
+from load_data.load_data import load_mnli_bert, load_qnli_bert, load_rte_bert, load_snli_bert
 
 
 # define hyper-parameters
@@ -43,7 +43,7 @@ class BERTConfig:
         self.dev_dataset_name = 'dev'
         self.test_dataset_name = 'test'
 
-        self.to_lower = True  # 忽略大小写
+        self.lower = True  # 忽略大小写
         self.tokenizer = 'spacy'  # 使用spacy进行分词
 
         self.bert_model_dir_or_name = 'en-base-uncased'
@@ -65,14 +65,16 @@ if n_gpu > 0:
 print(f"traing dataset { arg.dataset }, and using { n_gpu } gpus which is {arg.device}")
 
 # load data set
+cache_name = 'cache/{}_{}_{}'.format(arg.dataset, arg.lower, arg.tokenizer)
+refresh_data = False
 if arg.dataset == 'snli':
-    data_bundle = SNLIBertPipe(lower=arg.to_lower, tokenizer=arg.tokenizer).process_from_file()
+    data_bundle = load_snli_bert(lower=arg.lower, tokenizer=arg.tokenizer, _cache_fp=cache_name, refresh_=refresh_data)
 elif arg.dataset == 'rte':
-    data_bundle = RTEBertPipe(lower=arg.to_lower, tokenizer=arg.tokenizer).process_from_file()
+    data_bundle = load_rte_bert(lower=arg.lower, tokenizer=arg.tokenizer, _cache_fp=cache_name, refresh_=refresh_data)
 elif arg.dataset == 'qnli':
-    data_bundle = QNLIBertPipe(lower=arg.to_lower, tokenizer=arg.tokenizer).process_from_file()
+    data_bundle = load_qnli_bert(lower=arg.lower, tokenizer=arg.tokenizer, _cache_fp=cache_name, refresh_=refresh_data)
 elif arg.dataset == 'mnli':
-    data_bundle = MNLIBertPipe(lower=arg.to_lower, tokenizer=arg.tokenizer).process_from_file()
+    data_bundle = load_mnli_bert(lower=arg.lower, tokenizer=arg.tokenizer, _cache_fp=cache_name, refresh_=refresh_data)
 else:
     raise RuntimeError(f'NOT support {arg.dataset} dataset yet!')
 

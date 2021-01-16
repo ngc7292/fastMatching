@@ -3,7 +3,8 @@ import torch
 from torch import nn
 
 from fastNLP.embeddings import BertEmbedding
-from torch.nn import Transformer
+# from torch.nn import TransformerEncoder, TransformerEncoderLayer
+from fastNLP.modules.encoder import TransformerEncoder
 from fastNLP.core.utils import seq_len_to_mask
 
 
@@ -41,21 +42,18 @@ class BERT_Matching(nn.Module):
 
         self.loss_func = nn.CrossEntropyLoss()
         self.linear_after_ptm = nn.Linear(self.ptm_encoder.embed_size, args.transformer_dim)
-        self.transformer = Transformer(
-            num_encoder_layers=args.transformer_layer,
-            num_decoder_layers=args.transformer_layer,
-            dim_feedforward=self.ptm_encoder.embed_size,
-            d_model=args.transformer_dim,
-            nhead=args.transformer_num_head,
-            dropout=args.transformer_dropout
-        )
+        self.transformer_encoder = TransformerEncoder(num_layers=args.transformer_encoder_layer,
+                                                      d_model=args.transformer_dim,
+                                                      n_head=args.transformer_num_head,
+                                                      dim_ff=self.ptm_encoder.embed_size,
+                                                      dropout=args.transformer_dropout)
 
         self.decoder_input_dim = args.transformer_dim * 2
         if args.decoder_mode == "linnear":
-            self.ffn = nn.Linear(self.decoder_input_dim, len(self.vocabs['target']))
+            self.decoder = nn.Linear(self.decoder_input_dim, len(self.vocabs['target']))
         elif args.decoder_mode == "multi":
-            self.ffn = nn.Sequential(nn.Linear(self.decoder_input_dim, self.decoder_input_dim * 2),
-                                     nn.LeakyReLU(), MyDropout(args.decode_dropout),
+            self.decoder = nn.Sequential(nn.Linear(self.decoder_input_dim, self.decoder_input_dim * 2),
+                                     nn.LeakyReLU(), MyDropout(args.decoder_dropout),
                                      nn.Linear(self.decoder_input_dim * 2, len(self.vocabs['target'])))
         else:
             raise NotImplementedError
@@ -95,7 +93,7 @@ class BERT_Matching(nn.Module):
 
         encoded_concat_mask = torch.cat([encoded_1_mask, encoded_2_mask], dim=1)
 
-        transformer_out = self.transformer(encoded_cat, encoded_concat_mask)
+        transformer_out = self.transformer_encoder(encoded_cat, encoded_concat_mask)
 
         # 取出 transformer cls 拼在一起过decoder
         cls_1_2 = transformer_out[:, [0, encoded_1.size(1)]]
@@ -106,6 +104,3 @@ class BERT_Matching(nn.Module):
 
     def get_encoder_token(self, words):
         return self.encode_words(words)
-
-    def predict(self):
-        pass
