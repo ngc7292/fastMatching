@@ -39,7 +39,7 @@ class DCBERTConfig:
         args.add_argument("--ptm_lr_rate", default=0.1, type=float)
         args.add_argument('--weight_decay', default=1e-2, type=float)
         args.add_argument('--momentum', default=0.9, type=float)
-        args.add_argument('--batch_size', default=20, type=int)
+        args.add_argument('--batch_size', default=32, type=int)
         args.add_argument('--epoch', default=10, type=int)
         args.add_argument('--fix_ptm_epoch', default=-1, type=int)
         args.add_argument('--warmup_step', default=0.1, type=float)

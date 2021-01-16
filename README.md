@@ -8,12 +8,12 @@
 
 Name| Paper | Description 
 :---: | :---: | :---: 
-MNLI | [A Broad-Coverage Challenge Corpus for Sentence Understanding through Inference]() | 一个文本蕴含的任务，在给定前提（Premise）下，需要判断假设（Hypothesis）是否成立，其中因为MNLI主打卖点是集合了许多不同领域风格的文本，因此又分为matched和mismatched两个版本的MNLI数据集，前者指训练集和测试集的数据来源一致，而后者指来源不一致。该任务属于句子对的文本三分类问题。 
-SNLI | [A large annotated corpus for learning natural language inference]() | -
+MNLI | [A Broad-Coverage Challenge Corpus for Sentence Understanding through Inference](https://arxiv.org/pdf/1704.05426.pdf) | 一个文本蕴含的任务，在给定前提（Premise）下，需要判断假设（Hypothesis）是否成立，其中因为MNLI主打卖点是集合了许多不同领域风格的文本，因此又分为matched和mismatched两个版本的MNLI数据集，前者指训练集和测试集的数据来源一致，而后者指来源不一致。该任务属于句子对的文本三分类问题。 
+SNLI | [A large annotated corpus for learning natural language inference](https://arxiv.org/pdf/1508.05326.pdf) | -
 RTE | - | -
-QNLI | [SQuAD: 100,000+ Questions for Machine Comprehension of Text]() | -
-Quora | First Quora Dataset Release: Question Pairs | -
-MSMARCO(Ranking & ReRanking) | MS MARCO: A HUMAN GENERATED MACHINE READING COMPREHENSION DATASET | -
+QNLI | [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf) | -
+Quora | [Natural Language Understanding with the Quora Question Pairs Dataset](https://arxiv.org/pdf/1907.01041.pdf) | -
+MSMARCO(Ranking & ReRanking) | [MS MARCO: A HUMAN GENERATED MACHINE READING COMPREHENSION DATASET]() | -
 SQuADv2.0| [Know What You Don't Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) | -
 ASNQ | [TANDA: Transfer and Adapt Pre-Trained Transformer Models for Answer Sentence Selection](https://arxiv.org/pdf/1911.04118.pdf) | -
 
@@ -41,21 +41,33 @@ ASNQ | [TANDA: Transfer and Adapt Pre-Trained Transformer Models for Answer Sent
 
 model name | SNLI | MNLI | RTE | QNLI | Quora
 :---: | :---: | :---: | :---: | :---: | :---:
-CNTN [代码](model/cntn.py); [论文](https://www.aaai.org/ocs/index.php/IJCAI/IJCAI15/paper/view/11401/10844) | 77.79 vs - | 63.29/63.16(dev) vs - | 57.04(dev) vs - | 62.38(dev) vs - | - |
-ESIM[代码](model/bert.py); [论文](https://arxiv.org/pdf/1609.06038.pdf) | 88.13(glove) vs 88.0(glove)/88.7(elmo) | 77.78/76.49 vs 72.4/72.1* | 59.21(dev) vs - | 76.97(dev) vs - | - |
-MwAN [代码](model/mwan.py); [论文](https://www.ijcai.org/proceedings/2018/0613.pdf) | 87.9 vs 88.3 | 77.3/76.7(dev) vs 78.5/77.7 | - | 74.6(dev) vs - | 85.6 vs 89.12 |
-BERT (BASE version)[代码](model/bert.py); [论文](https://arxiv.org/pdf/1810.04805.pdf) | 90.6 vs - | - vs 84.6/83.4| 67.87(dev) vs 66.4 | 90.97(dev) vs 90.5 | - |
+CNTN  [论文](https://www.aaai.org/ocs/index.php/IJCAI/IJCAI15/paper/view/11401/10844) | 77.79 vs - | 63.29/63.16(dev) vs - | 57.04(dev) vs - | 62.38(dev) vs - | - |
+ESIM  [论文](https://arxiv.org/pdf/1609.06038.pdf) | 88.13(glove) vs 88.0(glove)/88.7(elmo) | 77.78/76.49 vs 72.4/72.1* | 59.21(dev) vs - | 76.97(dev) vs - | - |
+MwAN  [论文](https://www.ijcai.org/proceedings/2018/0613.pdf) | 87.9 vs 88.3 | 77.3/76.7(dev) vs 78.5/77.7 | - | 74.6(dev) vs - | 85.6 vs 89.12 |
+BERT (BASE version) [论文](https://arxiv.org/pdf/1810.04805.pdf) | 90.6 vs - | - vs 84.6/83.4| 67.87(dev) vs 66.4 | 90.97(dev) vs 90.5 | - |
+DC-BERT [论文](https://arxiv.org/pdf/2002.12591.pdf)| - | - | - | - |
+
 
 *ESIM模型由MNLI官方复现的结果为72.4/72.1，ESIM原论文当中没有汇报MNLI数据集的结果。
 
+
+
 ### TODO
 
-- [ ] 迁移数据loader以及model 
+- [ ] MSMARCO 数据dataloader
 
-- [ ] DC-BERT
+- [ ] SQuAD2.0 dataloader
+
+- [ ] ASNQ dataloader
+
+- [ ] MRR metric
+
+- [ ] Retriever P@10 metric
+
+- [x] DC-BERT
 
 - [ ] ColBERT
 
 - [ ] DeFormer
 
-- [ ] 补充readme
+- [x] 补充readme
