@@ -164,15 +164,14 @@ class SQuADLoader(Loader):
                         id = qas['id']
                         for answer in qas['answers']:
                             text = answer['text']
-                            answer_start = get_word_start(context, answer['answer_start'])
-                            answer_end = answer_start + len(text.split())
+                            answer_start_char = answer['answer_start']
+
                             ds.append(Instance(id=id,
                                                title=title,
                                                raw_words2=context,
                                                raw_words1=question,
                                                answer=text,
-                                               answer_start=answer_start,
-                                               answer_end=answer_end))
+                                               answer_start_char=answer_start_char))
 
         return ds
 

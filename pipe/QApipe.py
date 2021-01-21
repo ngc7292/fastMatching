@@ -27,9 +27,19 @@ def concat(ins):
     return words
 
 
+def get_answer_start(ins):
+    words = ins[Const.INPUTS(1)]
+    start = ins['answer_start_char']
+
+    for idx, w in enumerate(words):
+        start = start - len(w) - 1
+        if start < 0:
+            return idx
+    return '-'
+
 
 def get_answer_end(ins):
-    return ins[QATARGET1] + len(ins[Const.INPUTS(1)])
+    return ins[QATARGET1] + len(ins[QATARGET].split()) - 1
 
 
 class QAPipe(Pipe):
@@ -74,6 +84,8 @@ class QAPipe(Pipe):
                 dataset[Const.INPUTS(1)].lower()
 
         for name, dataset in data_bundle.datasets.items():
+            dataset.apply(get_answer_start, new_field_name=QATARGET1)
+            dataset.apply(get_answer_end, new_field_name=QATARGET2)
             dataset.apply(concat, new_field_name=Const.INPUT)
             if dataset.has_field(QATARGET1):
                 dataset.drop(lambda x: x[QATARGET1] == '-')

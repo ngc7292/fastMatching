@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+import sys
+sys.path.append("/remote-home/zyfei/project/fastMatching_pro")
+
 from fastNLP.io.pipe import SNLIPipe, QNLIPipe, MNLIPipe, RTEPipe
 from fastNLP import cache_results
 
@@ -59,3 +63,5 @@ if __name__ == '__main__':
 
     print(a)
     print(a.get_dataset('dev'))
+    print(a.get_dataset('dev').print_field_meta())
+
