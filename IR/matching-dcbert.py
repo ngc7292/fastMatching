@@ -17,41 +17,41 @@ fitlog.set_log_dir("logs")
 
 class DCBERTConfig:
     def __init__(self):
-        args = argparse.ArgumentParser()
-        args.add_argument("--dataset", default='snli', choices=['snli', 'qnli', 'mnli', 'msqa'])
-        args.add_argument("--train_dataset_name", default="train", type=str)
-        args.add_argument("--dev_dataset_name", default="dev", type=str)
-        args.add_argument("--test_dataset_name", default="test", type=str)
+        arg = argparse.ArgumentParser()
+        arg.add_argument("--dataset", default='snli', choices=['snli', 'qnli', 'mnli', 'msqa'])
+        arg.add_argument("--train_dataset_name", default="train", type=str)
+        arg.add_argument("--dev_dataset_name", default="dev", type=str)
+        arg.add_argument("--test_dataset_name", default="test", type=str)
 
-        args.add_argument("--model_dir_or_name", default="en-base-cased")
-        args.add_argument('--pool_method', default='first', choices=['last', 'first', 'avg', 'max'])
-        args.add_argument("--decoder_mode", default="linnear", choices=['linnear', 'mutli'])
-        args.add_argument("--bert_dropout", default=0.5, type=float)
-        args.add_argument("--decoder_dropout", default=0.1, type=float)
+        arg.add_argument("--model_dir_or_name", default="en-base-cased")
+        arg.add_argument('--pool_method', default='first', choices=['last', 'first', 'avg', 'max'])
+        arg.add_argument("--decoder_mode", default="linnear", choices=['linnear', 'mutli'])
+        arg.add_argument("--bert_dropout", default=0.5, type=float)
+        arg.add_argument("--decoder_dropout", default=0.1, type=float)
 
-        args.add_argument("--transformer_encoder_layer", default=6, type=int)
-        args.add_argument("--transformer_dim", default=128, type=int)
-        args.add_argument("--transformer_num_head", default=8, type=int)
-        args.add_argument("--transformer_dropout", default=0.5, type=float)
+        arg.add_argument("--transformer_encoder_layer", default=6, type=int)
+        arg.add_argument("--transformer_dim", default=128, type=int)
+        arg.add_argument("--transformer_num_head", default=8, type=int)
+        arg.add_argument("--transformer_dropout", default=0.5, type=float)
 
-        args.add_argument("--optimizer", default="adam", choices=['adam', 'sgd'])
-        args.add_argument("--lr", default=1e-4, type=float)
-        args.add_argument("--ptm_lr_rate", default=0.1, type=float)
-        args.add_argument('--weight_decay', default=1e-2, type=float)
-        args.add_argument('--momentum', default=0.9, type=float)
-        args.add_argument('--batch_size', default=32, type=int)
-        args.add_argument('--epoch', default=10, type=int)
-        args.add_argument('--fix_ptm_epoch', default=-1, type=int)
-        args.add_argument('--warmup_step', default=0.1, type=float)
-        args.add_argument('--warmup_schedule', default='linear')
+        arg.add_argument("--optimizer", default="adam", choices=['adam', 'sgd'])
+        arg.add_argument("--lr", default=1e-4, type=float)
+        arg.add_argument("--ptm_lr_rate", default=0.1, type=float)
+        arg.add_argument('--weight_decay', default=1e-2, type=float)
+        arg.add_argument('--momentum', default=0.9, type=float)
+        arg.add_argument('--batch_size', default=32, type=int)
+        arg.add_argument('--epoch', default=10, type=int)
+        arg.add_argument('--fix_ptm_epoch', default=-1, type=int)
+        arg.add_argument('--warmup_step', default=0.1, type=float)
+        arg.add_argument('--warmup_schedule', default='linear')
 
-        args.add_argument('--device', default='0')
-        args.add_argument('--lower', type=int, default=0)
-        args.add_argument('--tokenizer', default='spacy', choices=['raw', 'spacy'])
+        arg.add_argument('--device', default='0')
+        arg.add_argument('--lower', type=int, default=0)
+        arg.add_argument('--tokenizer', default='spacy', choices=['raw', 'spacy'])
 
-        args.add_argument('--debug', action='store_true')
+        arg.add_argument('--debug', action='store_true')
 
-        self.args = args.parse_args()
+        self.args = arg.parse_args()
 
         if self.args.dataset == "mnli":
             self.args.dev_dataset_name = "dev_matched"
@@ -136,8 +136,7 @@ else:
 callbacks = [fitlog_callback, ]
 
 if args.warmup_step:
-    callbacks.append(WarmupCallback(warmup=args.warmup_step,schedule=args.warmup_schedule))
-
+    callbacks.append(WarmupCallback(warmup=args.warmup_step, schedule=args.warmup_schedule))
 
 trainer = Trainer(bundle.datasets[args.train_dataset_name],
                   model,
