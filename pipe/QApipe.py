@@ -14,6 +14,7 @@ from fastNLP.core.vocabulary import Vocabulary
 
 from loader.QAloader import SQuADLoader
 
+QATARGET = 'answer'
 QATARGET1 = 'answer_start'
 QATARGET2 = 'answer_end'
 
@@ -90,8 +91,8 @@ class QAPipe(Pipe):
         data_bundle.set_vocab(word_vocab, Const.INPUT)
 
         input_fields = ['id', Const.INPUT, Const.INPUTS(0), Const.INPUTS(1), Const.INPUT_LEN, Const.INPUT_LENS(0),
-                        Const.INPUT_LENS(1), QATARGET1, QATARGET2]
-        target_fields = [QATARGET1, QATARGET2]
+                        Const.INPUT_LENS(1), QATARGET, QATARGET1, QATARGET2]
+        target_fields = [QATARGET, QATARGET1, QATARGET2]
 
         for name, dataset in data_bundle.datasets.items():
             dataset.add_seq_len(Const.INPUT)

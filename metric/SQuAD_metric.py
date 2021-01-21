@@ -84,7 +84,7 @@ class SQuADv2Metric(MetricBase):
     SQuADv2.0任务的评价Metric
     """
 
-    def __init__(self,pred=None, target=None):
+    def __init__(self, pred=None, target=None):
         super().__init__()
 
         self._init_param_map(pred=pred, target=target)
@@ -94,9 +94,10 @@ class SQuADv2Metric(MetricBase):
         self.total = 0
 
     def evaluate(self, pred, target):
-        self.em += compute_exact(a_gold=pred, a_pred=target)
-        self.f1 += compute_f1(a_gold=pred, a_pred=target)
-        self.total += 1
+        for p, t in zip(pred, target):
+            self.em += compute_exact(a_gold=p, a_pred=t)
+            self.f1 += compute_f1(a_gold=p, a_pred=t)
+            self.total += 1
 
     def get_metric(self, reset=True):
         em_res = self.em / self.total

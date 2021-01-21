@@ -17,15 +17,17 @@ class BertForQuestionAnswering(BaseModel):
 
     """
 
-    def __init__(self,bundle, args):
+    def __init__(self, bundle, args):
         super(BertForQuestionAnswering, self).__init__()
+        self.vocab = bundle.vocabs["words"]
 
         self.bert = BertEmbedding(vocab=bundle.vocabs['words'],
                                   model_dir_or_name=args.model_dir_or_name,
                                   layers=args.layers,
                                   pool_method=args.pool_method,
                                   dropout=args.bert_dropout,
-                                  include_cls_sep=False)
+                                  include_cls_sep=False,
+                                  auto_truncate=True)
         self.qa_outputs = nn.Linear(self.bert.embedding_dim, 2)
 
         self.loss_func = nn.CrossEntropyLoss()
@@ -51,10 +53,6 @@ class BertForQuestionAnswering(BaseModel):
 
         start_loss = self.loss_func(pred_start, answer_start)
         end_loss = self.loss_func(pred_end, answer_end)
-        print("start")
-        print(start_loss)
-        print("end")
-        print(end_loss)
 
         total_loss = (start_loss + end_loss) / 2
 
@@ -66,13 +64,17 @@ class BertForQuestionAnswering(BaseModel):
         :param kwargs:
         :return:
         """
-        words = kwargs['words']
+        words = kwargs['words'].detach().tolist()
+        target_text = kwargs['answer']
         forward = self.forward(**kwargs)
-        pred_start = torch.argmax(forward['pred_start'])
-        pred_end = torch.argmax(forward['pred_end'])
+        pred_start = torch.argmax(forward['pred_start'], dim=-1).detach().tolist()
+        pred_end = torch.argmax(forward['pred_end'], dim=-1).detach().tolist()
 
         pred_answer = []
         for word, start, end in zip(words, pred_start, pred_end):
-            pred_answer.append(word[start, end + 1])
+            sentence = []
+            for i in word[start:end]:
+                sentence.append(self.vocab.to_word(i))
+            pred_answer.append(" ".join(sentence))
 
-        return {'pred_answer': pred_answer}
+        return {'pred': pred_answer, 'target': target_text}

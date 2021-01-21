@@ -4,6 +4,9 @@ __title__="qa_bert"
 __author__="ngc7293"
 __mtime__="2021/1/20"
 """
+import sys
+sys.path.append("/remote-home/zyfei/project/fastMatching_pro")
+# print(sys.path)
 import torch
 import argparse
 import fitlog
@@ -71,10 +74,9 @@ print("====================================")
 
 print("loading datasets ...")
 
-cache_name = 'cache/{}_{}_{}'.format(args.dataset, args.lower, args.tokenizer)
 refresh_data = False
 if args.dataset == "squad":
-    bundle = load_squad(lower=args.lower, tokenizer=args.tokenizer, _cache_fp=cache_name, _refresh=refresh_data)
+    bundle = load_squad(lower=args.lower, tokenizer=args.tokenizer, _refresh=refresh_data)
 else:
     raise NotImplementedError
 
