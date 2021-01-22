@@ -73,7 +73,7 @@ class BertForQuestionAnswering(BaseModel):
         pred_answer = []
         for word, start, end in zip(words, pred_start, pred_end):
             sentence = []
-            for i in word[start:end]:
+            for i in word[start:end+1]:
                 sentence.append(self.vocab.to_word(i))
             pred_answer.append(" ".join(sentence))
 

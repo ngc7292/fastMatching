@@ -47,6 +47,10 @@ MwAN  [论文](https://www.ijcai.org/proceedings/2018/0613.pdf) | 87.9 vs 88.3 |
 BERT (BASE version) [论文](https://arxiv.org/pdf/1810.04805.pdf) | 90.6 vs - | - vs 84.6/83.4| 67.87(dev) vs 66.4 | 90.97(dev) vs 90.5 | - |
 DC-BERT [论文](https://arxiv.org/pdf/2002.12591.pdf)| - | - | - | - |
 
+model name | SQuADv2.0 EM | SQuADv2.0 F1
+:---: | :---: | :---:
+BERT (BASE version) [论文](https://arxiv.org/pdf/1810.04805.pdf) | - vs 73.302 | - vs 76.284
+ALBERT | 88.107 | 90.902
 
 *ESIM模型由MNLI官方复现的结果为72.4/72.1，ESIM原论文当中没有汇报MNLI数据集的结果。
 
