@@ -32,6 +32,9 @@ ASNQ | [TANDA: Transfer and Adapt Pre-Trained Transformer Models for Answer Sent
 - BERT： [训练代码](IR/matching_bert.py).
 论文链接：[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf).
 
+ DC-BERT [训练代码]().
+ 论文链接：[DC-BERT: DECOUPLING QUESTION AND DOCUMENT FOR EFFICIENT CONTEXTUAL ENCODING](https://arxiv.org/pdf/2002.12591.pdf).
+
 ## about results
 使用fastNLP复现的结果vs论文汇报结果，在前面的表示使用fastNLP复现的结果
 
