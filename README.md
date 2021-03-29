@@ -45,7 +45,8 @@ CNTN  [论文](https://www.aaai.org/ocs/index.php/IJCAI/IJCAI15/paper/view/11401
 ESIM  [论文](https://arxiv.org/pdf/1609.06038.pdf) | 88.13(glove) vs 88.0(glove)/88.7(elmo) | 77.78/76.49 vs 72.4/72.1* | 59.21(dev) vs - | 76.97(dev) vs - | - |
 MwAN  [论文](https://www.ijcai.org/proceedings/2018/0613.pdf) | 87.9 vs 88.3 | 77.3/76.7(dev) vs 78.5/77.7 | - | 74.6(dev) vs - | 85.6 vs 89.12 |
 BERT (BASE version) [论文](https://arxiv.org/pdf/1810.04805.pdf) | 90.6 vs - | - vs 84.6/83.4| 67.87(dev) vs 66.4 | 90.97(dev) vs 90.5 | - |
-DC-BERT [论文](https://arxiv.org/pdf/2002.12591.pdf)| - | - | - | - |
+DC-BERT [论文](https://arxiv.org/pdf/2002.12591.pdf)| 70.79- |69.2 - | 81.4- | - |
+BERT CLS CAT[论文]（） | 70.8-| 69.6- |81.4 - |
 
 model name | SQuADv2.0 EM | SQuADv2.0 F1
 :---: | :---: | :---:
