@@ -14,7 +14,7 @@ RTE | - | -
 QNLI | [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf) | -
 Quora | [Natural Language Understanding with the Quora Question Pairs Dataset](https://arxiv.org/pdf/1907.01041.pdf) | -
 MSMARCO(Ranking & ReRanking) | [MS MARCO: A HUMAN GENERATED MACHINE READING COMPREHENSION DATASET](https://arxiv.org/pdf/1611.09268.pdf) | -
-SQuADv2.0| [Know What You Don't Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) | -
+SQuADv2.0| [Know What You Don't Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) | Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.SQuAD2.0 combines the 100,000 questions in SQuAD1.1 with over 50,000 unanswerable questions written adversarially by crowdworkers to look similar to answerable ones. To do well on SQuAD2.0, systems must not only answer questions when possible, but also determine when no answer is supported by the paragraph and abstain from answering.
 ASNQ | [TANDA: Transfer and Adapt Pre-Trained Transformer Models for Answer Sentence Selection](https://arxiv.org/pdf/1911.04118.pdf) | -
 
 ## about models and how to run it 
